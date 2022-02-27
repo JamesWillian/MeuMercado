@@ -37,6 +37,8 @@ type
     procedure Image1Click(Sender: TObject);
     procedure lboxCategoriasItemClick(const Sender: TCustomListBox;
       const Item: TListBoxItem);
+    procedure lboxProdutosItemClick(const Sender: TCustomListBox;
+      const Item: TListBoxItem);
   private
     { Private declarations }
     procedure AddProduto(idProduto: Integer;
@@ -57,7 +59,7 @@ implementation
 
 {$R *.fmx}
 
-uses UnitPrincipal, Frame.ProdutoCatalogo;
+uses UnitPrincipal, Frame.ProdutoCatalogo, UnitProduto;
 
 { TfrmCatalogo }
 
@@ -156,6 +158,16 @@ procedure TfrmCatalogo.lboxCategoriasItemClick(const Sender: TCustomListBox;
   const Item: TListBoxItem);
 begin
   SelecionarCategoria(Item);
+end;
+
+procedure TfrmCatalogo.lboxProdutosItemClick(const Sender: TCustomListBox;
+  const Item: TListBoxItem);
+begin
+  if not Assigned(frmProduto) then
+    Application.CreateForm(TfrmProduto, frmProduto);
+
+  frmProduto.Show;
+
 end;
 
 procedure TfrmCatalogo.ListarCategorias;
