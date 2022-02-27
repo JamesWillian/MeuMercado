@@ -23,11 +23,10 @@ type
     Button1: TButton;
     Layout3: TLayout;
     Rectangle2: TRectangle;
-    Label2: TLabel;
-    Label3: TLabel;
+    lbReceberCasa: TLabel;
+    lbRetirarLoja: TLabel;
     rectFormaEntrega: TRectangle;
-    ColorAnimation1: TColorAnimation;
-    FloatAnimation1: TFloatAnimation;
+    AnimationFormaEntrega: TFloatAnimation;
     lvMercados: TListView;
     imgShop: TImage;
     imgTaxaEntrega: TImage;
@@ -35,12 +34,14 @@ type
     procedure FormShow(Sender: TObject);
     procedure lvMercadosItemClick(const Sender: TObject;
       const AItem: TListViewItem);
+    procedure lbReceberCasaClick(Sender: TObject);
   private
     { Private declarations }
     procedure AddMercadoLv(id_mercado: Integer;
                            nome, endereco: String;
                            tx_entrega, vlr_min: Double);
     procedure ListarMercados;
+    procedure SelecionarFormaEntrega(labelSelecionada: TLabel);
   public
     { Public declarations }
   end;
@@ -99,6 +100,11 @@ begin
   ListarMercados;
 end;
 
+procedure TfrmPrincipal.lbReceberCasaClick(Sender: TObject);
+begin
+  SelecionarFormaEntrega(TLabel(Sender));
+end;
+
 procedure TfrmPrincipal.ListarMercados;
 begin
   AddMercadoLv(1,'Mercadinho da Esquina','Rua Cheia de Buraco, 999',5.00,25.00);
@@ -118,4 +124,16 @@ begin
 
 end;
 
+procedure TfrmPrincipal.SelecionarFormaEntrega(labelSelecionada: TLabel);
+begin
+  lbReceberCasa.FontColor := $FF8F8F8F;
+  lbRetirarLoja.FontColor := $FF8F8F8F;
+
+  labelSelecionada.FontColor := $FFFFFFFF;
+
+  AnimationFormaEntrega.StopValue := labelSelecionada.Position.X;
+  AnimationFormaEntrega.Start;
+end;
+
 end.
+
